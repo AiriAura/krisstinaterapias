@@ -155,7 +155,7 @@ a {
     color: var(--purple-dark);
 }
 
-/* --- Menú Móvil (Original y funcional) --- */
+/* --- Menú Móvil --- */
 .mobile-nav-toggle {
   display: none;
   z-index: 1001;
@@ -204,6 +204,20 @@ a {
   clip-path: circle(150% at 90% 5%);
   opacity: 1;
   visibility: visible;
+}
+
+.mobile-nav-close {
+  position: absolute;
+  top: 20px;
+  right: 25px;
+  background: none;
+  border: none;
+  font-size: 3rem;
+  color: var(--purple-dark);
+  cursor: pointer;
+  line-height: 1;
+  padding: 0;
+  z-index: 1002;
 }
 
 .mobile-nav-menu a {
@@ -311,7 +325,19 @@ h2 {
   letter-spacing: 0;
 }
 
-/* (Resto de los estilos de las secciones... Terapias, Sobre, etc. permanecen igual) */
+/* Títulos responsivos para Hero */
+.desktop-title {
+  display: block;
+}
+.mobile-title {
+  display: none;
+  font-size: clamp(3rem, 10vw, 4rem);
+  font-family: var(--font-hero);
+  color: white;
+  text-shadow: 0 5px 20px rgba(0,0,0,0.35);
+  margin-bottom: 20px;
+}
+
 
 /* --- Sección Introducción --- */
 .intro {text-align:center; background: var(--bg-light);}
@@ -365,7 +391,7 @@ h2 {
 .contacto .btn-main{margin-bottom:25px;display:inline-block;}
 .contacto form{max-width:600px;margin:0 auto;display:flex;flex-direction:column;gap:15px;}
 .contacto input,.contacto textarea{padding:15px;border-radius:12px;border:1px solid #CCC;font-size:1rem;font-family:var(--font-body);transition:box-shadow 0.3s,border-color 0.3s;}
-.contacto input:focus,.contacto textarea:focus{outline:none;border-color:var(--green-accent);box-shadow:0 0 0 3px rgba(119,221,119,0.3);}
+.contacto input:focus,.contacto textarea:focus{outline:none;border-color:var(--green-accent);box-shadow:0 0 0 3px rgba(119,221,119,0.3);}\
 .contacto button{background:linear-gradient(135deg,var(--green-accent),var(--green-light));color:var(--text-base);padding:15px;border:none;border-radius:12px;font-size:1rem;cursor:pointer;transition:0.3s;font-weight:600;font-family:var(--font-body);}
 .contacto button:hover{transform:scale(1.05);box-shadow:0 8px 25px rgba(119,221,119,0.4);}
 .form-status{padding:12px 16px;border-radius:8px;margin-bottom:15px;font-size:0.9rem;animation:slideIn .3s ease;}
@@ -426,6 +452,13 @@ a:focus-visible,button:focus-visible,input:focus-visible,textarea:focus-visible{
   
   .diagonal {
     clip-path: none;
+  }
+
+  .desktop-title {
+    display: none; /* Oculta el título curvo en móvil */
+  }
+  .mobile-title {
+    display: block; /* Muestra el título recto en móvil */
   }
 
   .whatsapp-float {

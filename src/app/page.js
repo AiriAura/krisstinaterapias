@@ -104,15 +104,19 @@ const BLOG_POSTS = [
 ];
 
 // ==================== COMPONENTES ====================
-function NavLink({ href, children, className = "" }) {
+function NavLink({ href, children, className = "", onClick = () => {} }) {
   return (
     <a 
       href={href} 
       className={className}
       onClick={(e) => {
-        e.preventDefault();
-        const target = document.querySelector(href);
-        target?.scrollIntoView({ behavior: 'smooth', block: 'start' });
+        const targetId = href.substring(1);
+        if (targetId) {
+            e.preventDefault();
+            const target = document.getElementById(targetId);
+            target?.scrollIntoView({ behavior: 'smooth', block: 'start' });
+        }
+        onClick(e); // Llama al onClick externo (ej. para cerrar el menú)
       }}
     >
       {children}
@@ -337,6 +341,9 @@ export default function Home() {
         id="mobile-nav-menu"
         aria-label="Menú móvil"
       >
+        <button onClick={closeMobileMenu} className="mobile-nav-close" aria-label="Cerrar menú">
+          &times;
+        </button>
         <NavLink href="#inicio" onClick={closeMobileMenu}>Inicio</NavLink>
         <NavLink href="#terapias" onClick={closeMobileMenu}>Terapias</NavLink>
         <NavLink href="#sobre" onClick={closeMobileMenu}>Sobre Mí</NavLink>
@@ -348,15 +355,24 @@ export default function Home() {
         {/* HERO */}
         <section className="hero diagonal" id="inicio">
           <div className="hero-content">
-            <svg viewBox="0 0 900 300" width="900" height="300" style={{overflow: 'visible'}} aria-hidden="true">
-              <path id="curve" d="M 0, 150 C 250, 50, 650, 50, 900, 150" fill="transparent"/>
-              <text className="curved-title">
-                <textPath xlinkHref="#curve" startOffset="50%" textAnchor="middle">
-                  Conecta con tu Esencia Divina
-                </textPath>
-              </text>
-            </svg>
+          
+            {/* Título para Desktop (curvo) */}
+            <div className="desktop-title">
+              <svg viewBox="0 0 900 300" width="900" height="300" style={{overflow: 'visible'}} aria-hidden="true">
+                <path id="curve" d="M 0, 150 C 250, 50, 650, 50, 900, 150" fill="transparent"/>
+                <text className="curved-title">
+                  <textPath xlinkHref="#curve" startOffset="50%" textAnchor="middle">
+                    Conecta con tu Esencia Divina
+                  </textPath>
+                </text>
+              </svg>
+            </div>
+
+            {/* Título para Móvil (recto) */}
+            <h1 className="mobile-title">Conecta con tu Esencia Divina</h1>
+            
             <h1 className="visually-hidden">Cristina Holística - Terapias para el Alma</h1>
+            
              <p style={{
               fontSize: '1.5rem',
               color: 'var(--accent-color)',
