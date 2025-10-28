@@ -1,6 +1,8 @@
-"use client";
+'use client';
 import { useEffect, useState } from 'react';
 import Image from 'next/image';
+import Link from 'next/link'; // Importar Link de Next.js
+import { BLOG_POSTS } from './blog/posts'; // Importar los posts
 
 // ==================== CONFIGURACIÓN Y DATOS ====================
 const TERAPIAS_DATA = [
@@ -11,8 +13,8 @@ const TERAPIAS_DATA = [
     descripcion: 'Canaliza la energía universal para purificar tu campo energético, liberar bloqueos y florecer como el loto.',
     duracion: '60 min',
     precio: 'Consultar',
-    imagen: 'https://images.unsplash.com/photo-1544164559-90f4302d7142?auto=format&fit=crop&w=800&q=80',
-    alt: 'Sesión de Reiki con sanación energética'
+    imagen: '/reiki.jpg?v=1.4',
+    alt: 'Manos aplicando terapia Reiki, simbolizando sanación energética.'
   },
   {
     id: 'flores-bach',
@@ -21,8 +23,8 @@ const TERAPIAS_DATA = [
     descripcion: 'Terapia floral para armonizar emociones y restaurar tu paz interior con esencias naturales.',
     duracion: '45 min',
     precio: 'Consultar',
-    imagen: 'https://images.unsplash.com/photo-1604079339391-53e79e6c8672?auto=format&fit=crop&w=800&q=80',
-    alt: 'Flores de Bach para terapia emocional'
+    imagen: '/flores-de-bach.jpg?v=1.4',
+    alt: 'Frascos de esencias florales de Bach sobre una superficie de madera.'
   },
   {
     id: 'yoga',
@@ -31,8 +33,8 @@ const TERAPIAS_DATA = [
     descripcion: 'Posturas conscientes y meditación para encontrar tu centro, aumentar tu vitalidad y conectar con tu esencia.',
     duracion: '75 min',
     precio: 'Consultar',
-    imagen: 'https://images.unsplash.com/photo-1552196563-55cd4e45efb3?auto=format&fit=crop&w=800&q=80',
-    alt: 'Clase de yoga terapéutico al amanecer'
+    imagen: '/yoga-terapeutico.jpg?v=1.4',
+    alt: 'Persona en una postura de yoga terapéutico enfocada en la alineación y el bienestar.'
   },
   {
     id: 'yoga-infantil',
@@ -41,8 +43,8 @@ const TERAPIAS_DATA = [
     descripcion: 'Clases lúdicas que ayudan a los más pequeños a desarrollar conciencia corporal y gestión emocional.',
     duracion: '45 min',
     precio: 'Consultar',
-    imagen: 'https://images.unsplash.com/photo-1599447421416-3414500d18a5?auto=format&fit=crop&w=800&q=80',
-    alt: 'Niños practicando yoga en grupo'
+    imagen: '/yoga-ninos.jpg?v=1.4',
+    alt: 'Grupo de niños sonriendo mientras practican yoga en un ambiente lúdico.'
   },
   {
     id: 'yoga-tercera-edad',
@@ -51,8 +53,8 @@ const TERAPIAS_DATA = [
     descripcion: 'Movimientos suaves adaptados para mantener flexibilidad, fuerza y equilibrio en la edad dorada.',
     duracion: '60 min',
     precio: 'Consultar',
-    imagen: 'https://images.unsplash.com/photo-1506126613408-eca07ce68773?auto=format&fit=crop&w=800&q=80',
-    alt: 'Adultos mayores practicando yoga suave'
+    imagen: '/yoga-tercera-edad.jpg?v=1.4',
+    alt: 'Adultos mayores realizando estiramientos suaves de yoga con sillas.'
   },
   {
     id: 'circulos-mujeres',
@@ -61,8 +63,8 @@ const TERAPIAS_DATA = [
     descripcion: 'Espacios sagrados donde las mujeres se reúnen para compartir, sanar y celebrar su feminidad.',
     duracion: '120 min',
     precio: 'Consultar',
-    imagen: 'https://images.unsplash.com/photo-1573496359142-b8d87734a5a2?auto=format&fit=crop&w=800&q=80',
-    alt: 'Círculo de mujeres en ritual de sanación'
+    imagen: '/circulos-de-mujeres.jpg?v=1.4',
+    alt: 'Mujeres sentadas en círculo, compartiendo en un espacio de confianza.'
   },
   {
     id: 'ayurveda',
@@ -71,8 +73,8 @@ const TERAPIAS_DATA = [
     descripcion: 'Descubre tu dosha y recibe recomendaciones personalizadas para equilibrar tu constitución única.',
     duracion: '90 min',
     precio: 'Consultar',
-    imagen: 'https://images.unsplash.com/photo-1600334129128-685c5582fd35?auto=format&fit=crop&w=800&q=80',
-    alt: 'Consulta de medicina ayurvédica'
+    imagen: '/consultoria-ayurveda.jpg?v=1.4',
+    alt: 'Elementos representativos de la medicina Ayurveda, como especias y hierbas.'
   },
   {
     id: 'masaje-ayurvedico',
@@ -81,27 +83,11 @@ const TERAPIAS_DATA = [
     descripcion: 'Técnicas ancestrales con aceites herbales que nutren tu cuerpo y calman tu mente profundamente.',
     duracion: '75 min',
     precio: 'Consultar',
-    imagen: 'https://images.unsplash.com/photo-1544161515-4ab6ce6db874?auto=format&fit=crop&w=800&q=80',
-    alt: 'Masaje ayurvédico con aceites naturales'
+    imagen: '/masaje-ayurvedico.jpg?v=1.4',
+    alt: 'Escena de masaje ayurvédico con aceites tibios y hierbas.'
   }
 ];
 
-const BLOG_POSTS = [
-  {
-    id: 'desapego',
-    titulo: 'El Arte del Desapego: Dejar Ir para Crecer',
-    extracto: 'Como los árboles sueltan sus hojas, nosotros también debemos aprender a soltar lo que ya no nos sirve.',
-    imagen: 'https://images.unsplash.com/photo-1476611338395-5f9b92402517?auto=format&fit=crop&w=800&q=80',
-    alt: 'Camino en bosque de bambú iluminado'
-  },
-  {
-    id: 'equilibrio',
-    titulo: 'Encuentra tu Centro: Rituales para el Equilibrio',
-    extracto: 'Pequeños actos diarios que pueden anclarte al presente y restaurar tu armonía interior.',
-    imagen: 'https://images.unsplash.com/photo-1598202391038-e52b204e3345?auto=format&fit=crop&w=800&q=80',
-    alt: 'Piedras en equilibrio en playa serena'
-  }
-];
 
 // ==================== COMPONENTES ====================
 function NavLink({ href, children, className = "", onClick = () => {} }) {
@@ -111,7 +97,7 @@ function NavLink({ href, children, className = "", onClick = () => {} }) {
       className={className}
       onClick={(e) => {
         const targetId = href.substring(1);
-        if (targetId) {
+        if (targetId && document.getElementById(targetId)) { // Check if element exists
             e.preventDefault();
             const target = document.getElementById(targetId);
             target?.scrollIntoView({ behavior: 'smooth', block: 'start' });
@@ -152,7 +138,7 @@ function TerapiaCard({ terapia }) {
 
 function BlogCard({ post }) {
   return (
-    <article className="blog-card">
+    <Link href={`/blog/${post.id}`} className="blog-card">
       <Image 
         src={post.imagen} 
         alt={post.alt}
@@ -164,11 +150,9 @@ function BlogCard({ post }) {
       <div className="blog-card-content">
         <h3>{post.titulo}</h3>
         <p>{post.extracto}</p>
-        <a href={`/blog/${post.id}`} aria-label={`Leer más sobre ${post.titulo}`}>
-          Leer más &rarr;
-        </a>
+        <span className="blog-read-more">Leer más &rarr;</span>
       </div>
-    </article>
+    </Link>
   );
 }
 
@@ -376,7 +360,7 @@ export default function Home() {
              <p style={{
               fontSize: '1.5rem',
               color: 'var(--accent-color)',
-              margin: '1.5rem 0',
+              margin: '2rem 0 1.5rem 0',
               letterSpacing: '0.2em'
             }}>
               --- ❖ ---
@@ -414,8 +398,8 @@ export default function Home() {
         <section className="sobre" id="sobre">
           <div className="reveal-on-scroll" style={{display: 'contents'}}>
             <Image 
-              src="https://images.unsplash.com/photo-1593811167563-a7c379a11470?auto=format&fit=crop&w=800&q=80" 
-              alt="Cristina, terapeuta holística, en entorno natural" 
+              src="/cristina-meditando.jpg" 
+              alt="Cristina meditando en la orilla de un río, representando la paz interior" 
               width={800} 
               height={800}
               loading="lazy"

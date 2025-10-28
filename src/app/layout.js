@@ -1,33 +1,40 @@
 
-import { Lavishly_Yours, Stalemate, Buda, Montserrat } from "next/font/google";
+import { Lavishly_Yours, Stalemate, Buda, Montserrat, Cinzel_Decorative } from "next/font/google";
 import "./globals.css";
 
 // Importando la fuente para el cuerpo del texto
 const montserrat = Montserrat({
   subsets: ["latin"],
   weight: ["400", "600"],
-  variable: "--font-montserrat", // Mantenemos esta para el cuerpo
+  variable: "--font-montserrat",
 });
 
-// NUEVA FUENTE: Para "Conecta con tu Esencia Divina"
+// FUENTE: Para "Conecta con tu Esencia Divina"
 const lavishly = Lavishly_Yours({
   subsets: ["latin"],
   weight: "400",
   variable: "--font-lavishly",
 });
 
-// NUEVA FUENTE: Para el logo "Cristina Holística"
+// FUENTE: Para el logo "Cristina Holística"
 const stalemate = Stalemate({
   subsets: ["latin"],
   weight: "400",
   variable: "--font-stalemate",
 });
 
-// NUEVA FUENTE: Para el resto de los títulos
+// FUENTE: Para títulos (actualmente en desuso)
 const buda = Buda({
   subsets: ["latin"],
   weight: "300",
   variable: "--font-buda",
+});
+
+// NUEVA FUENTE: Para los títulos de sección (H2)
+const cinzel = Cinzel_Decorative({
+  subsets: ["latin"],
+  weight: ["400"],
+  variable: "--font-cinzel",
 });
 
 export const metadata = {
@@ -37,7 +44,7 @@ export const metadata = {
 
 export default function RootLayout({ children }) {
   return (
-    <html lang="es" className={`${montserrat.variable} ${lavishly.variable} ${stalemate.variable} ${buda.variable}`}>
+    <html lang="es" className={`${montserrat.variable} ${lavishly.variable} ${stalemate.variable} ${buda.variable} ${cinzel.variable}`}>
       <head>
         <link rel="icon" href="/icon.ico" />
       </head>
