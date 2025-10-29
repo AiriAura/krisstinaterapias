@@ -1,0 +1,26 @@
+export const BLOG_POSTS = [
+  {
+    id: 'desapego',
+    titulo: 'El Arte del Desapego: Dejar Ir para Crecer',
+    extracto: 'Como los árboles sueltan sus hojas, nosotros también debemos aprender a soltar lo que ya no nos sirve.',
+    imagen: '/hojas-otoño.jpg',
+    alt: 'Hojas de otoño cayendo suavemente de un árbol',
+    content: `El desapego es una de las lecciones más profundas y liberadoras que nos ofrece la naturaleza. Observa los árboles en otoño: sin dudarlo, sueltan sus hojas, permitiendo que lo viejo dé paso a lo nuevo. No se aferran, confían en el ciclo de la vida. Para nosotros, este es un poderoso recordatorio de que el crecimiento personal a menudo requiere que dejemos ir aquello que ya cumplió su propósito.\n\nSoltar no es un acto de olvido o de indiferencia, sino de amor propio y sabiduría. Significa liberar creencias limitantes, relaciones que ya no nos nutren, o versiones pasadas de nosotros mismos que nos impiden avanzar. Al crear este espacio vacío, invitamos a nuevas experiencias, nuevas conexiones y una versión más auténtica de nuestro ser a florecer. Es en el vacío fértil del desapego donde encontramos la verdadera libertad y la paz interior.`
+  },
+  {
+    id: 'equilibrio',
+    titulo: 'Encuentra tu Centro: Rituales para el Equilibrio',
+    extracto: 'Pequeños actos diarios que pueden anclarte al presente y restaurar tu armonía interior.',
+    imagen: '/equilibrio.jpg',
+    alt: 'Vela encendida y un cuenco tibetano, creando una atmósfera de paz',
+    content: `En un mundo que se mueve a un ritmo vertiginoso, encontrar nuestro centro es más que un lujo; es una necesidad. El equilibrio no es un destino final, sino una práctica diaria, un ritual consciente que nos ancla al momento presente. No se necesitan grandes gestos, sino pequeños actos de amor y atención hacia nosotros mismos.\n\nComienza tu día con cinco minutos de silencio, simplemente respirando. Siente el aire entrar y salir, conectando con el ritmo de tu cuerpo. Prepara una taza de té y disfrútala sin distracciones, saboreando cada sorbo. Enciende una vela o un incienso al atardecer para marcar la transición del día a la noche. Estos pequeños rituales son anclas sagradas que calman el sistema nervioso, clarifican la mente y nos recuerdan que la paz que buscamos afuera ya reside en nuestro interior, esperando ser redescubierta.`
+  },
+  {
+    id: 'viaje-india',
+    titulo: '✨ Mi viaje hacia el yoga y la India ✨',
+    extracto: 'Desde que tengo memoria, un sueño me acompañaba: viajar a la India y estudiar yoga.',
+    imagen: '/viaje-india.jpg',
+    alt: 'Persona meditando en un ashram en Rishikesh, India.',
+    content: `Desde que tengo memoria, un sueño me acompañaba: viajar a la India y estudiar yoga. No sabía cómo ni cuándo, solo sentía en lo profundo de mi corazón que algún día llegaría ese momento.\n\nAntes de que el yoga apareciera en mi vida, probé distintos deportes… y fracasaba en el intento. Nada lograba conectar conmigo, hasta que un día este regalo me encontró. En ese tiempo sufría de fuertes dolores de cabeza y la medicina tradicional me decía que era hereditario, que debía tomar medicamentos y relajantes musculares de por vida. Pero yo quería algo distinto, algo natural, algo que realmente me sanara.\n\nFue entonces cuando el yoga se cruzó en mi camino, gracias a mi trabajo en un jardín infantil. Allí cada semana se hacían clases de yoga con los niños y también con los adultos. Al vivir esa experiencia, sentí por primera vez la magia de la práctica: calma, conexión y una energía distinta. Me encantó. Tanto, que empecé a investigarlo por mi cuenta y, poco a poco, lo fui articulando con la carrera que estaba estudiando.\n\nCuando terminé mis estudios, seguí formándome en yoga para niños y niñas, y mi sueño de llegar a la India se hacía cada vez más fuerte. En medio de este camino, la vida me llevó a Perú para cuidar a mi padre. Los fines de semana aprovechaba para seguir estudiando filosofía del yoga, y fue ahí donde conocí a mi maestra, quien me contactó con India y se convirtió en una guía clave para cumplir mi propósito.\n\nRecuerdo claramente que una noche soñé con el planeta Júpiter, símbolo de abundancia y sueños por cumplirse. Al despertar busqué su significado y decía: “los sueños están por concretarse”. Y así fue.\n\nNo faltaron las voces de prejuicio: “India es un país pobre”, “es peligroso”, “te pasarán cosas malas”. Pero yo seguí mi intuición. Sabía que no era así. Y entonces llegó el gran día: en marzo de 2020, 14 días antes de que comenzara la pandemia, llegué a India y me establecí en un ashram. Cuando cerraron las fronteras, me quedé allí, resguardada y protegida, durante seis meses en la ciudad sagrada del yoga.\n\nFueron los meses más increíbles de mi vida. Aprendí sobre la filosofía, la humildad, la paciencia, el agradecimiento y el fluir con lo que la vida nos presenta. Dejé que el universo me sorprendiera.\n\nUn maestro allí me dijo una frase que marcó mi camino:\n✨ “No busques afuera lo que ya está dentro de ti”.\n\nEse viaje fue el inicio de mi verdadera sanación. Me enseñó a encontrarme conmigo misma, a volver a mí y a vivir con el corazón abierto. Hoy, esa experiencia sigue latiendo en cada clase y en cada espacio donde comparto el yoga, con la intención de que otros también descubran el poder transformador que yo encontré. 💛🙏`
+  }
+];
