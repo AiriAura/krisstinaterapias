@@ -9,13 +9,15 @@
     "lint": "eslint"
   },
   "dependencies": {
+    "framer-motion": "^12.23.24",
+    "lucide-react": "^0.548.0",
+    "next": "latest",
     "react": "^18",
-    "react-dom": "^18",
-    "next": "latest"
+    "react-dom": "^18"
   },
   "devDependencies": {
+    "@eslint/eslintrc": "^3",
     "eslint": "^9",
-    "eslint-config-next": "latest",
-    "@eslint/eslintrc": "^3"
+    "eslint-config-next": "latest"
   }
 }

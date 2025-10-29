@@ -1,95 +1,27 @@
 'use client';
 import { useEffect, useState } from 'react';
+import { motion } from 'framer-motion';
 import Image from 'next/image';
-import Link from 'next/link'; // Importar Link de Next.js
-import { BLOG_POSTS } from './blog/posts'; // Importar los posts
+import Link from 'next/link';
+import { MessageCircle } from 'lucide-react';
 
-// ==================== CONFIGURACIÓN Y DATOS ====================
-const TERAPIAS_DATA = [
-  {
-    id: 'reiki',
-    titulo: 'Reiki',
-    subtitulo: 'Sanación Energética',
-    descripcion: 'Canaliza la energía universal para purificar tu campo energético, liberar bloqueos y florecer como el loto.',
-    duracion: '60 min',
-    precio: 'Consultar',
-    imagen: '/reiki.jpg?v=1.4',
-    alt: 'Manos aplicando terapia Reiki, simbolizando sanación energética.'
-  },
-  {
-    id: 'flores-bach',
-    titulo: 'Flores de Bach',
-    subtitulo: 'Equilibrio Emocional',
-    descripcion: 'Terapia floral para armonizar emociones y restaurar tu paz interior con esencias naturales.',
-    duracion: '45 min',
-    precio: 'Consultar',
-    imagen: '/flores-de-bach.jpg?v=1.4',
-    alt: 'Frascos de esencias florales de Bach sobre una superficie de madera.'
-  },
-  {
-    id: 'yoga',
-    titulo: 'Yoga Terapéutico',
-    subtitulo: 'Unión de Cuerpo y Espíritu',
-    descripcion: 'Posturas conscientes y meditación para encontrar tu centro, aumentar tu vitalidad y conectar con tu esencia.',
-    duracion: '75 min',
-    precio: 'Consultar',
-    imagen: '/yoga-terapeutico.jpg?v=1.4',
-    alt: 'Persona en una postura de yoga terapéutico enfocada en la alineación y el bienestar.'
-  },
-  {
-    id: 'yoga-infantil',
-    titulo: 'Yoga para Niños',
-    subtitulo: 'Crecimiento Consciente',
-    descripcion: 'Clases lúdicas que ayudan a los más pequeños a desarrollar conciencia corporal y gestión emocional.',
-    duracion: '45 min',
-    precio: 'Consultar',
-    imagen: '/yoga-ninos.jpg?v=1.4',
-    alt: 'Grupo de niños sonriendo mientras practican yoga en un ambiente lúdico.'
-  },
-  {
-    id: 'yoga-tercera-edad',
-    titulo: 'Yoga para Tercera Edad',
-    subtitulo: 'Vitalidad y Bienestar',
-    descripcion: 'Movimientos suaves adaptados para mantener flexibilidad, fuerza y equilibrio en la edad dorada.',
-    duracion: '60 min',
-    precio: 'Consultar',
-    imagen: '/yoga-tercera-edad.jpg?v=1.4',
-    alt: 'Adultos mayores realizando estiramientos suaves de yoga con sillas.'
-  },
-  {
-    id: 'circulos-mujeres',
-    titulo: 'Círculos de Mujeres',
-    subtitulo: 'Sanación Colectiva',
-    descripcion: 'Espacios sagrados donde las mujeres se reúnen para compartir, sanar y celebrar su feminidad.',
-    duracion: '120 min',
-    precio: 'Consultar',
-    imagen: '/circulos-de-mujeres.jpg?v=1.4',
-    alt: 'Mujeres sentadas en círculo, compartiendo en un espacio de confianza.'
-  },
-  {
-    id: 'ayurveda',
-    titulo: 'Consultoría Ayurveda',
-    subtitulo: 'Medicina Ancestral',
-    descripcion: 'Descubre tu dosha y recibe recomendaciones personalizadas para equilibrar tu constitución única.',
-    duracion: '90 min',
-    precio: 'Consultar',
-    imagen: '/consultoria-ayurveda.jpg?v=1.4',
-    alt: 'Elementos representativos de la medicina Ayurveda, como especias y hierbas.'
-  },
-  {
-    id: 'masaje-ayurvedico',
-    titulo: 'Masaje Ayurvédico',
-    subtitulo: 'Terapia Corporal',
-    descripcion: 'Técnicas ancestrales con aceites herbales que nutren tu cuerpo y calman tu mente profundamente.',
-    duracion: '75 min',
-    precio: 'Consultar',
-    imagen: '/masaje-ayurvedico.jpg?v=1.4',
-    alt: 'Escena de masaje ayurvédico con aceites tibios y hierbas.'
-  }
-];
+// Componentes
+import TerapiaCard from './components/TerapiaCard';
+import ModalTerapia from './components/ModalTerapia';
+import TestimonioCard from './components/TestimonioCard';
+import FAQ from './components/FAQ';
+import FormularioContacto from './components/FormularioContacto';
 
+// Datos
+import { TERAPIAS_DATA, ordenarPorRelevancia } from './data/terapias';
+import { TESTIMONIOS_DESTACADOS } from './data/testimonios';
+import { BLOG_POSTS } from './blog/posts';
 
-// ==================== COMPONENTES ====================
+// Utils
+import { abrirWhatsApp, getWhatsAppURL } from './utils/whatsapp';
+import { eventos } from './utils/analytics';
+
+// ==================== COMPONENTES AUXILIARES ====================
 function NavLink({ href, children, className = "", onClick = () => {} }) {
   return (
     <a 
@@ -97,12 +29,13 @@ function NavLink({ href, children, className = "", onClick = () => {} }) {
       className={className}
       onClick={(e) => {
         const targetId = href.substring(1);
-        if (targetId && document.getElementById(targetId)) { // Check if element exists
-            e.preventDefault();
-            const target = document.getElementById(targetId);
-            target?.scrollIntoView({ behavior: 'smooth', block: 'start' });
+        if (targetId && document.getElementById(targetId)) {
+          e.preventDefault();
+          const target = document.getElementById(targetId);
+          target?.scrollIntoView({ behavior: 'smooth', block: 'start' });
+          eventos.clickNavLink(targetId);
         }
-        onClick(e); // Llama al onClick externo (ej. para cerrar el menú)
+        onClick(e);
       }}
     >
       {children}
@@ -110,35 +43,13 @@ function NavLink({ href, children, className = "", onClick = () => {} }) {
   );
 }
 
-function TerapiaCard({ terapia }) {
-  return (
-    <article className="card">
-      <Image 
-        src={terapia.imagen} 
-        alt={terapia.alt}
-        width={800} 
-        height={400}
-        loading="lazy"
-        style={{width: '100%', height: '200px', objectFit: 'cover'}} 
-      />
-      <div className="card-content">
-        <h3>{terapia.titulo}</h3>
-        <p className="card-subtitle">{terapia.subtitulo}</p>
-        <p>{terapia.descripcion}</p>
-        <div className="card-info">
-          <span className="price">{terapia.duracion} / {terapia.precio}</span>
-          <NavLink href="#contacto" className="btn-reservar">
-            Reservar
-          </NavLink>
-        </div>
-      </div>
-    </article>
-  );
-}
-
 function BlogCard({ post }) {
   return (
-    <Link href={`/blog/${post.id}`} className="blog-card">
+    <Link 
+      href={`/blog/${post.id}`} 
+      className="blog-card"
+      onClick={() => eventos.clickBlogPost(post.id, post.titulo)}
+    >
       <Image 
         src={post.imagen} 
         alt={post.alt}
@@ -159,16 +70,17 @@ function BlogCard({ post }) {
 // ==================== COMPONENTE PRINCIPAL ====================
 export default function Home() {
   const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
-  const [formStatus, setFormStatus] = useState({ type: '', message: '' });
-  const [isSubmitting, setIsSubmitting] = useState(false);
+  const [modalTerapia, setModalTerapia] = useState(null);
+  const [terapiaParaFormulario, setTerapiaParaFormulario] = useState(null);
+
+  // Ordenar terapias (populares primero)
+  const terapiasOrdenadas = ordenarPorRelevancia(TERAPIAS_DATA, 'popular');
 
   useEffect(() => {
     const header = document.getElementById('header');
     const sections = document.querySelectorAll('section[id]');
     const navLinks = document.querySelectorAll('.desktop-nav a, .mobile-nav-menu a');
-    const revealElements = document.querySelectorAll('.reveal-on-scroll');
 
-    // Throttle para optimizar performance
     let scrollTimeout;
     function handleScroll() {
       if (scrollTimeout) return;
@@ -202,14 +114,6 @@ export default function Home() {
           }
         });
 
-        // Intersection Observer sería mejor, pero manteniendo tu lógica
-        revealElements.forEach(el => {
-          const rect = el.getBoundingClientRect();
-          if (rect.top <= window.innerHeight - 100 && rect.bottom >= 0) {
-            el.classList.add('is-visible');
-          }
-        });
-
         scrollTimeout = null;
       }, 100);
     }
@@ -217,62 +121,35 @@ export default function Home() {
     handleScroll();
     window.addEventListener('scroll', handleScroll, { passive: true });
 
+    // Timer de página
+    let timeOnPage = 0;
+    const pageTimer = setInterval(() => {
+      timeOnPage += 30;
+      eventos.tiempoEnPagina(timeOnPage);
+    }, 30000);
+
     return () => {
       window.removeEventListener('scroll', handleScroll);
       if (scrollTimeout) clearTimeout(scrollTimeout);
+      clearInterval(pageTimer);
     };
   }, []);
 
-  const toggleMobileMenu = () => {
-    setMobileMenuOpen(!mobileMenuOpen);
+  const handleVerMasTerapia = (terapia) => {
+    setModalTerapia(terapia);
+    eventos.verModalTerapia(terapia.id);
   };
 
-  const closeMobileMenu = () => {
-    setMobileMenuOpen(false);
-  };
-
-  const handleSubmit = async (e) => {
-    e.preventDefault();
-    setIsSubmitting(true);
-    setFormStatus({ type: '', message: '' });
-
-    const formData = new FormData(e.target);
-    const data = {
-      nombre: formData.get('nombre'),
-      email: formData.get('email'),
-      mensaje: formData.get('mensaje')
-    };
-
-    try {
-      // Aquí conectarás tu API route: /api/contact
-      const response = await fetch('/api/contact', {
-        method: 'POST',
-        headers: { 'Content-Type': 'application/json' },
-        body: JSON.stringify(data)
-      });
-
-      if (response.ok) {
-        setFormStatus({ 
-          type: 'success', 
-          message: '¡Gracias! Tu mensaje ha sido enviado. Te contactaré pronto 🙏' 
-        });
-        e.target.reset();
-      } else {
-        throw new Error('Error al enviar');
-      }
-    } catch (error) {
-      setFormStatus({ 
-        type: 'error', 
-        message: 'Hubo un error. Por favor intenta nuevamente o escríbeme directamente.' 
-      });
-    } finally {
-      setIsSubmitting(false);
-    }
+  const handleReservarTerapia = (terapia) => {
+    setTerapiaParaFormulario(terapia);
+    const contactoSection = document.getElementById('contacto');
+    contactoSection?.scrollIntoView({ behavior: 'smooth' });
+    eventos.clickReservar(terapia.id, terapia.precioNumerico);
   };
 
   return (
     <>
-      {/* Schema.org Structured Data para SEO */}
+      {/* Schema.org */}
       <script
         type="application/ld+json"
         dangerouslySetInnerHTML={{
@@ -282,21 +159,21 @@ export default function Home() {
             "name": "Cristina Holística",
             "description": "Terapias holísticas: Reiki, Flores de Bach, Yoga, Ayurveda",
             "url": "https://tudominio.com",
-            "telephone": "+56-9-XXXX-XXXX",
+            "telephone": "+56-9-1234-5678",
             "address": {
               "@type": "PostalAddress",
               "addressLocality": "Santiago",
               "addressCountry": "CL"
             },
-            "priceRange": "$$",
-            "image": "https://tudominio.com/og-image.jpg"
+            "priceRange": "$$"
           })
         }}
       />
 
+      {/* HEADER */}
       <header id="header" className="at-top">
         <NavLink href="#inicio" className="logo">
-        🪷 Cristina Holística
+          🪷 Cristina Holística
         </NavLink>
         
         <nav className="desktop-nav" aria-label="Navegación principal">
@@ -309,9 +186,8 @@ export default function Home() {
 
         <button 
           className={`mobile-nav-toggle ${mobileMenuOpen ? 'active' : ''}`}
-          id="mobile-nav-toggle"
-          onClick={toggleMobileMenu}
-          aria-label="Abrir menú de navegación"
+          onClick={() => setMobileMenuOpen(!mobileMenuOpen)}
+          aria-label="Abrir menú"
           aria-expanded={mobileMenuOpen}
         >
           <span></span>
@@ -320,27 +196,30 @@ export default function Home() {
         </button>
       </header>
 
+      {/* MOBILE MENU */}
       <nav 
         className={`mobile-nav-menu ${mobileMenuOpen ? 'open' : ''}`}
-        id="mobile-nav-menu"
         aria-label="Menú móvil"
       >
-        <button onClick={closeMobileMenu} className="mobile-nav-close" aria-label="Cerrar menú">
+        <button onClick={() => setMobileMenuOpen(false)} className="mobile-nav-close">
           &times;
         </button>
-        <NavLink href="#inicio" onClick={closeMobileMenu}>Inicio</NavLink>
-        <NavLink href="#terapias" onClick={closeMobileMenu}>Terapias</NavLink>
-        <NavLink href="#sobre" onClick={closeMobileMenu}>Sobre Mí</NavLink>
-        <NavLink href="#blog" onClick={closeMobileMenu}>Blog</NavLink>
-        <NavLink href="#contacto" onClick={closeMobileMenu}>Contacto</NavLink>
+        <NavLink href="#inicio" onClick={() => setMobileMenuOpen(false)}>Inicio</NavLink>
+        <NavLink href="#terapias" onClick={() => setMobileMenuOpen(false)}>Terapias</NavLink>
+        <NavLink href="#sobre" onClick={() => setMobileMenuOpen(false)}>Sobre Mí</NavLink>
+        <NavLink href="#blog" onClick={() => setMobileMenuOpen(false)}>Blog</NavLink>
+        <NavLink href="#contacto" onClick={() => setMobileMenuOpen(false)}>Contacto</NavLink>
       </nav>
 
       <main>
         {/* HERO */}
         <section className="hero diagonal" id="inicio">
-          <div className="hero-content">
-          
-            {/* Título para Desktop (curvo) */}
+          <motion.div 
+            className="hero-content"
+            initial={{ opacity: 0, y: 30 }}
+            animate={{ opacity: 1, y: 0 }}
+            transition={{ duration: 0.8 }}
+          >
             <div className="desktop-title">
               <svg viewBox="0 0 900 300" width="900" height="300" style={{overflow: 'visible'}} aria-hidden="true">
                 <path id="curve" d="M 0, 150 C 250, 50, 650, 50, 900, 150" fill="transparent"/>
@@ -352,54 +231,91 @@ export default function Home() {
               </svg>
             </div>
 
-            {/* Título para Móvil (recto) */}
             <h1 className="mobile-title">Conecta con tu Esencia Divina</h1>
-            
             <h1 className="visually-hidden">Cristina Holística - Terapias para el Alma</h1>
             
-             <p style={{
-              fontSize: '1.5rem',
-              color: 'var(--accent-color)',
-              margin: '2rem 0 1.5rem 0',
-              letterSpacing: '0.2em'
-            }}>
+            <motion.p 
+              style={{
+                fontSize: '1.5rem',
+                color: 'var(--accent-color)',
+                margin: '2rem 0 1.5rem 0',
+                letterSpacing: '0.2em'
+              }}
+              initial={{ opacity: 0 }}
+              animate={{ opacity: 1 }}
+              transition={{ delay: 0.3 }}
+            >
               --- ❖ ---
-            </p>
-            <p>Un viaje de sanación para el alma, donde la naturaleza y tu mundo interior se encuentran.</p>
-            <NavLink href="#contacto" className="btn">
-              Despierta tu Luz Interior
-            </NavLink>
-          </div>
+            </motion.p>
+            
+            <motion.p
+              initial={{ opacity: 0 }}
+              animate={{ opacity: 1 }}
+              transition={{ delay: 0.5 }}
+            >
+              Un viaje de sanación para el alma, donde la naturaleza y tu mundo interior se encuentran.
+            </motion.p>
+            
+            <motion.div
+              initial={{ opacity: 0, y: 20 }}
+              animate={{ opacity: 1, y: 0 }}
+              transition={{ delay: 0.7 }}
+            >
+              <NavLink href="#contacto" className="btn">
+                Despierta tu Luz Interior
+              </NavLink>
+            </motion.div>
+          </motion.div>
         </section>
 
         {/* INTRO */}
         <section className="intro" id="intro">
-          <div className="reveal-on-scroll">
+          <motion.div
+            initial={{ opacity: 0, y: 30 }}
+            whileInView={{ opacity: 1, y: 0 }}
+            viewport={{ once: true }}
+            transition={{ duration: 0.6 }}
+          >
             <h2>¿Anhelas Paz en un Mundo Ajetreado?</h2>
             <p>La desconexión espiritual y el estrés son el velo que oculta tu verdadera esencia. Te ofrezco un santuario para el alma, un espacio para meditar, sanar y redescubrir la serenidad que ya habita en ti.</p>
             <NavLink href="#terapias">Encuentra tu Terapia &rarr;</NavLink>
-          </div>
+          </motion.div>
         </section>
 
         {/* TERAPIAS */}
         <section className="terapias diagonal" id="terapias">
-          <div className="reveal-on-scroll">
+          <motion.div
+            initial={{ opacity: 0, y: 30 }}
+            whileInView={{ opacity: 1, y: 0 }}
+            viewport={{ once: true }}
+          >
             <h2>Caminos hacia tu Bienestar</h2>
             <p className="subtitle">Terapias que nutren el alma y equilibran tu energía.</p>
+            
             <div className="cards">
-              {TERAPIAS_DATA.map(terapia => (
-                <TerapiaCard key={terapia.id} terapia={terapia} />
+              {terapiasOrdenadas.map((terapia, index) => (
+                <TerapiaCard 
+                  key={terapia.id} 
+                  terapia={terapia} 
+                  onVerMas={handleVerMasTerapia}
+                  index={index}
+                />
               ))}
             </div>
-          </div>
+          </motion.div>
         </section>
 
         {/* SOBRE MÍ */}
         <section className="sobre" id="sobre">
-          <div className="reveal-on-scroll" style={{display: 'contents'}}>
+          <motion.div 
+            style={{display: 'contents'}}
+            initial={{ opacity: 0 }}
+            whileInView={{ opacity: 1 }}
+            viewport={{ once: true }}
+          >
             <Image 
               src="/cristina-meditando.jpg" 
-              alt="Cristina meditando en la orilla de un río, representando la paz interior" 
+              alt="Cristina meditando en la orilla de un río"
               width={800} 
               height={800}
               loading="lazy"
@@ -413,33 +329,51 @@ export default function Home() {
                 Inicia tu Viaje Conmigo
               </NavLink>
             </div>
-          </div>
+          </motion.div>
         </section>
 
         {/* TESTIMONIOS */}
         <section className="testimonios diagonal" id="testimonios">
-          <div className="reveal-on-scroll">
+          <motion.div
+            initial={{ opacity: 0, y: 30 }}
+            whileInView={{ opacity: 1, y: 0 }}
+            viewport={{ once: true }}
+          >
             <h2>Ecos del Alma</h2>
-            <article className="testimonial">
-              <Image 
-                src="https://randomuser.me/api/portraits/women/47.jpg" 
-                alt="Elena R., clienta satisfecha"
-                width={80} 
-                height={80}
-                loading="lazy"
-                style={{borderRadius: '50%', marginBottom: '15px', border: '3px solid var(--pink-accent)'}}
-              />
-              <blockquote>
-                <p>"Las sesiones con Cristina son un regalo para el alma. He conectado con una parte de mí que estaba dormida. Su energía es pura y su guía, un mapa hacia la paz interior."</p>
-                <cite>- Elena R., Buscadora Espiritual</cite>
-              </blockquote>
-            </article>
-          </div>
+            <p className="subtitle">Transformaciones reales de personas como tú</p>
+            
+            <div className="testimonios-grid">
+              {TESTIMONIOS_DESTACADOS.map((testimonio, index) => (
+                <TestimonioCard 
+                  key={testimonio.id} 
+                  testimonio={testimonio}
+                  index={index}
+                />
+              ))}
+            </div>
+          </motion.div>
+        </section>
+
+        {/* FAQ */}
+        <section className="faq-section" id="faq">
+          <motion.div
+            initial={{ opacity: 0, y: 30 }}
+            whileInView={{ opacity: 1, y: 0 }}
+            viewport={{ once: true }}
+          >
+            <h2>Preguntas Frecuentes</h2>
+            <p className="subtitle">Todo lo que necesitas saber antes de iniciar tu viaje</p>
+            <FAQ />
+          </motion.div>
         </section>
 
         {/* BLOG */}
         <section className="blog" id="blog">
-          <div className="reveal-on-scroll">
+          <motion.div
+            initial={{ opacity: 0, y: 30 }}
+            whileInView={{ opacity: 1, y: 0 }}
+            viewport={{ once: true }}
+          >
             <h2>Senderos de Sabiduría</h2>
             <p className="subtitle">Inspiración para tu práctica diaria.</p>
             <div className="blog-cards">
@@ -447,73 +381,42 @@ export default function Home() {
                 <BlogCard key={post.id} post={post} />
               ))}
             </div>
-          </div>
+          </motion.div>
         </section>
 
         {/* CONTACTO */}
         <section className="contacto diagonal" id="contacto">
-          <div className="reveal-on-scroll">
+          <motion.div
+            initial={{ opacity: 0, y: 30 }}
+            whileInView={{ opacity: 1, y: 0 }}
+            viewport={{ once: true }}
+          >
             <h2>Da el Primer Paso hacia tu Interior</h2>
             <p>Tu viaje de sanación comienza con una simple intención. Estoy aquí para escucharte y guiarte.</p>
             
-            {/* Botón de WhatsApp */}
-            <a 
-              href="https://wa.me/56912345678?text=Hola%20Cristina,%20quisiera%20información%20sobre%20las%20terapias" 
+            <motion.a 
+              href={getWhatsAppURL()}
               target="_blank"
               rel="noopener noreferrer"
-              className="btn btn-main"
-              aria-label="Contactar por WhatsApp"
+              className="btn btn-main btn-whatsapp-hero"
+              onClick={() => eventos.clickWhatsApp('seccion-contacto')}
+              whileHover={{ scale: 1.05 }}
+              whileTap={{ scale: 0.95 }}
             >
-              💬 Agendar mi Sesión por WhatsApp
-            </a>
+              <MessageCircle size={20} />
+              Agendar mi Sesión por WhatsApp
+            </motion.a>
             
-            <p style={{marginTop: '20px', marginBottom: '10px'}}>O déjame un mensaje:</p>
+            <p style={{marginTop: '30px', marginBottom: '20px', fontSize: '1.1rem'}}>
+              O déjame un mensaje:
+            </p>
             
-            <form onSubmit={handleSubmit} aria-label="Formulario de contacto">
-              <input 
-                type="text" 
-                name="nombre"
-                placeholder="Tu Nombre" 
-                required 
-                aria-label="Nombre"
-              />
-              <input 
-                type="email" 
-                name="email"
-                placeholder="Tu Email" 
-                required 
-                aria-label="Correo electrónico"
-              />
-              <textarea 
-                name="mensaje"
-                placeholder="Tu mensaje..." 
-                rows="4" 
-                required
-                aria-label="Mensaje"
-              ></textarea>
-              
-              {formStatus.message && (
-                <div 
-                  className={`form-status ${formStatus.type}`}
-                  role="alert"
-                  aria-live="polite"
-                >
-                  {formStatus.message}
-                </div>
-              )}
-              
-              <button 
-                type="submit" 
-                disabled={isSubmitting}
-                aria-busy={isSubmitting}
-              >
-                {isSubmitting ? 'Enviando...' : 'Enviar Mensaje'}
-              </button>
-            </form>
-          </div>
+            <FormularioContacto terapiaPreseleccionada={terapiaParaFormulario} />
+          </motion.div>
         </section>
       </main>
 
+      {/* FOOTER */}
       <footer>
         <p>&copy; 2025 Cristina Holística | Conecta con tu Esencia Divina</p>
         <p style={{fontSize: '0.85em', marginTop: '10px', opacity: 0.8}}>
@@ -525,17 +428,29 @@ export default function Home() {
       </footer>
 
       {/* WhatsApp flotante */}
-      <a
-        href="https://wa.me/56912345678?text=Hola%20Cristina"
+      <motion.a
+        href={getWhatsAppURL()}
         target="_blank"
         rel="noopener noreferrer"
         className="whatsapp-float"
-        aria-label="Contactar por WhatsApp"
+        onClick={() => eventos.clickWhatsApp('boton-flotante')}
+        initial={{ scale: 0 }}
+        animate={{ scale: 1 }}
+        transition={{ delay: 2, type: "spring" }}
+        whileHover={{ scale: 1.1 }}
+        whileTap={{ scale: 0.9 }}
       >
-        <svg viewBox="0 0 32 32" width="32" height="32" fill="currentColor">
-          <path d="M16 0c-8.837 0-16 7.163-16 16 0 2.825 0.737 5.607 2.137 8.048l-2.137 7.952 8.188-2.113c2.322 1.225 4.938 1.863 7.812 1.863 8.837 0 16-7.163 16-16s-7.163-16-16-16zM16 29.25c-2.438 0-4.819-0.681-6.912-1.969l-0.5-0.3-4.137 1.069 1.1-4.088-0.319-0.519c-1.413-2.244-2.163-4.838-2.163-7.506 0-7.731 6.288-14.019 14.019-14.019s14.019 6.288 14.019 14.019-6.288 14.019-14.019 14.019zM22.5 18.563c-0.337-0.169-2-0.987-2.313-1.1-0.312-0.113-0.538-0.169-0.762 0.169s-0.875 1.1-1.075 1.325c-0.2 0.225-0.4 0.256-0.737 0.087s-1.438-0.531-2.738-1.688c-1.012-0.9-1.694-2.013-1.894-2.35s-0.019-0.519 0.15-0.688c0.156-0.15 0.337-0.4 0.506-0.6s0.225-0.337 0.337-0.562 0.056-0.425-0.025-0.6-0.762-1.838-1.044-2.519c-0.275-0.662-0.556-0.575-0.762-0.587-0.194-0.012-0.419-0.012-0.644-0.012s-0.587 0.087-0.894 0.425c-0.306 0.337-1.175 1.15-1.175 2.806s1.206 3.256 1.369 3.481c0.169 0.225 2.35 3.594 5.694 5.038 0.794 0.344 1.413 0.544 1.894 0.7 0.8 0.256 1.531 0.219 2.106 0.131 0.644-0.094 2-0.819 2.281-1.606s0.281-1.469 0.194-1.606c-0.087-0.137-0.313-0.225-0.65-0.394z"/>
-        </svg>
-      </a>
+        <MessageCircle size={28} />
+      </motion.a>
+
+      {/* Modal de terapia */}
+      {modalTerapia && (
+        <ModalTerapia 
+          terapia={modalTerapia}
+          onClose={() => setModalTerapia(null)}
+          onReservar={handleReservarTerapia}
+        />
+      )}
     </>
   );
 }
