@@ -323,7 +323,7 @@ export default function Home() {
             />
             <div>
               <h2>Mi Dharma: Ser un Faro en tu Camino</h2>
-              <p>Mi viaje espiritual me ha enseñado que la verdadera sanación nace de la compasión y la conexión. Mi propósito, mi dharma, es guiarte con herramientas ancestrales y una profunda intuición para que recuerdes la luz y la sabiduría que ya residen en ti.</p>
+              <p> Soy terapeuta complementaria de Reiki IV gran maestría, terapeuta en flores de Bach, instructora de yoga 200 horas en OM yoga international en India el 2020 y 300 horas en AATM YOGASHALA el 2025, certifica por Yoga Alliance el máximo organismo del yoga, certificada en Yoga terapeutico (100 hrs) en India, y Consultora en Ayurveda y masajes ayurvédicos certifica en India el 2023 con + de 10 años guiando procesos de transformación y más de 500 sesiones realizadas con resultados hermosos, además realizo formaciones de yoga con las enseñanzas que se conservan de los maestros indios. Mi viaje espiritual me ha enseñado que la verdadera sanación nace de la compasión y la conexión. Mi propósito, mi dharma, es guiarte con herramientas ancestrales y una profunda intuición para que recuerdes la luz y la sabiduría que ya residen en ti.</p>
               <p>Formada en terapias holísticas y como Maestra de Reiki, mi enfoque es puramente holístico, honrando la unión inseparable de tu cuerpo, tu mente y tu espíritu divino.</p>
               <NavLink href="#contacto" className="btn">
                 Inicia tu Viaje Conmigo
