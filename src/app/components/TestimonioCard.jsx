@@ -1,10 +1,13 @@
 // components/TestimonioCard.jsx
 'use client';
+import { useState } from 'react';
 import { motion } from 'framer-motion';
 import Image from 'next/image';
-import { Star, CheckCircle } from 'lucide-react';
+import { Star, CheckCircle, ChevronDown } from 'lucide-react';
 
 export default function TestimonioCard({ testimonio, index = 0, variant = 'default' }) {
+  const [isExpanded, setIsExpanded] = useState(false);
+
   // Variante compacta para mostrar en cards de terapias
   if (variant === 'mini') {
     return (
@@ -44,7 +47,6 @@ export default function TestimonioCard({ testimonio, index = 0, variant = 'defau
       whileInView={{ opacity: 1, y: 0 }}
       viewport={{ once: true }}
       transition={{ duration: 0.5, delay: index * 0.1 }}
-      whileHover={{ y: -5, transition: { duration: 0.3 } }}
     >
       <div className="testimonio-header">
         <Image 
@@ -92,17 +94,21 @@ export default function TestimonioCard({ testimonio, index = 0, variant = 'defau
         </div>
       </div>
 
-      {testimonio.testimonioCompleto && (
-        <motion.div 
-          className="testimonio-completo"
-          initial={{ opacity: 0 }}
-          whileInView={{ opacity: 1 }}
-          viewport={{ once: true }}
-          transition={{ delay: 0.3 }}
-        >
-          <p>"{testimonio.testimonioCompleto}"</p>
-        </motion.div>
-      )}
+      <div className="testimonio-completo">
+          <p>"{isExpanded ? testimonio.testimonioCompleto : testimonio.testimonioCorto}"</p>
+          <button 
+            onClick={() => setIsExpanded(!isExpanded)} 
+            className="ver-mas-btn"
+          >
+            <span>{isExpanded ? 'Ver menos' : 'Ver más'}</span>
+            <motion.div
+              animate={{ rotate: isExpanded ? 180 : 0 }}
+              transition={{ duration: 0.3 }}
+            >
+              <ChevronDown size={20} />
+            </motion.div>
+          </button>
+      </div>
 
       <div className="testimonio-footer">
         <span className="testimonio-fecha">
