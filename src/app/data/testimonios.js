@@ -8,7 +8,7 @@ export const TESTIMONIOS_POR_TERAPIA = {
   'yoga': [
     {
       id: 'test-yoga-1',
-      nombre: 'Alumna de Yoga',
+      nombre: 'Cecilia Fonseca',
       edad: 63,
       problema: 'Dolencias de lumbago',
       resultado: 'Alivio del dolor y mejora integral',
@@ -16,9 +16,9 @@ export const TESTIMONIOS_POR_TERAPIA = {
       sesiones: 100,
       imagen: 'https://randomuser.me/api/portraits/women/44.jpg',
       verificado: true,
-      fecha: '2024-10-21',
-      testimonioCorto: 'Llegué al yoga por un dolor de lumbago, pero encontré una transformación completa. Con la guía de Krisstina, no solo alivié mis dolencias, sino que mejoré mi cuerpo, mente y alma. Hoy, a mis 63 años, me siento con vitalidad.',
-      testimonioCompleto: 'Tengo 63 años y hace cuatro que comencé mis clases de yoga con la maestra Krisstina. Me acerqué para mejorar mis dolencias de lumbago, y allí comenzó mi proceso. Con ejercicios suaves, aprendí a elongar, a conocer mi cuerpo, a relajarme, liberar tensiones, despejar la mente y conectar con mi respiración. Aunque fui para mejorar mis dolencias físicas, el yoga ha sido mucho más: un cambio integral que ha mejorado mi cuerpo, mi alma y mi mente. Hoy, cuido a mi nieta de un año tres veces por semana, algo que pensé que no podría hacer por el lumbago. Sin embargo, me siento con un gran estado físico. Cuando termino de cuidarla, realizo mis ejercicios de yoga: estirar la columna, relajar el cuello, elongar piernas, brazos y hombros. Ya no tengo ese dolor constante, y si aparece, lo alivio con mis clases semanales o con los ejercicios aprendidos en casa. Cuando he dormido mal, practico la postura del niño por 10 o 15 minutos y me siento mucho mejor. Estoy muy agradecida de haber conocido a la maestra; nos ha transmitido sus conocimientos de manera amable y generosa. Además, siempre está estudiando, incluso viajando a la India para aprender de los mejores maestros. Recomiendo el yoga para sanar dolencias físicas y espirituales, soltar penas, aliviar dolores, bajar el estrés y así, mejorar nuestra calidad de vida.'
+      fecha: '2024-11-20',
+      testimonioCorto: 'A mis 63 años, el yoga con Krisstina no solo alivió mi lumbago, sino que transformó mi cuerpo, mente y alma. Ahora disfruto de una vitalidad que me permite cuidar a mi nieta.',
+      testimonioCompleto: 'Mi experiencia con clases de yoga. Tengo 63 años y hace 4 años comencé mis clases de yoga con la maestra Krisstina en mi comuna. Fui para mejorar mis dolencias de lumbago de ese tiempo y allí comencé mi proceso con la maestra...con ejercicios suaves aprendiendo a elongar, a conocer mi cuerpo , aprender a relajarse, liberar tensiones,despejar la mente y a conectar con mi respiración . Fui para mejorar mis dolencias físicas pero yoga ha sido mucho más ,es un cambio integral, ha mejorado mi cuerpo, mi alma y mi mente. Hoy cuido a mi nieta de un año ...voy tres veces por semana ,pensé que por el lumbago no lo podría hacer....sin embargo me siento con gran estado físico para hacerlo ,cuando termino los cuidados realizo mis ejercicios de yoga....estirar la columna, relajar el cuello, elongar piernas brazos,hombros... etc. Ya no tengo ese dolor constante de lumbago y si viene lo alivio con mis clases semanales o en casa con los ejercicios ya aprendidos. Cuando he dormido mal práctico la postura del niño por unos 10 a 15 minutos y me siento mucho mejor. Estoy muy agradecida haber conocido a la maestra ,ella nos ha transmitido sus conocimientos de una manera amable y generosa ,además siempre está estudiando ,incluso viajando a la India para aprender con los mejores maestros. Recomiendo yoga para sanar dolencias físicas y espirituales , para soltar penas y dolores ,para bajar el stress y asi mejorar nuestra cálidad de vida.'
     },
     {
       id: 'test-yoga-2',
@@ -67,7 +67,7 @@ export const TESTIMONIOS_DESTACADOS = [
   },
   {
     id: 'dest-2',
-    nombre: 'Alumna de Yoga',
+    nombre: 'Cecilia Fonseca',
     edad: 63,
     ocupacion: 'Alumna de Yoga',
     problema: 'Dolencias de lumbago',
@@ -75,10 +75,10 @@ export const TESTIMONIOS_DESTACADOS = [
     rating: 5,
     imagen: 'https://randomuser.me/api/portraits/women/44.jpg',
     verificado: true,
-    fecha: '2024-10-21',
+    fecha: '2024-11-20',
     terapias: ['yoga'],
-    testimonioCorto: 'Llegué al yoga por un dolor de lumbago, pero encontré una transformación completa. Con la guía de Krisstina, no solo alivié mis dolencias, sino que mejoré mi cuerpo, mente y alma. Hoy, a mis 63 años, me siento con vitalidad.',
-    testimonioCompleto: 'Tengo 63 años y hace cuatro que comencé mis clases de yoga con la maestra Krisstina. Me acerqué para mejorar mis dolencias de lumbago, y allí comenzó mi proceso. Con ejercicios suaves, aprendí a elongar, a conocer mi cuerpo, a relajarme, liberar tensiones, despejar la mente y conectar con mi respiración. Aunque fui para mejorar mis dolencias físicas, el yoga ha sido mucho más: un cambio integral que ha mejorado mi cuerpo, mi alma y mi mente. Hoy, cuido a mi nieta de un año tres veces por semana, algo que pensé que no podría hacer por el lumbago. Sin embargo, me siento con un gran estado físico. Cuando termino de cuidarla, realizo mis ejercicios de yoga: estirar la columna, relajar el cuello, elongar piernas, brazos y hombros. Ya no tengo ese dolor constante, y si aparece, lo alivio con mis clases semanales o con los ejercicios aprendidos en casa. Cuando he dormido mal, practico la postura del niño por 10 o 15 minutos y me siento mucho mejor. Estoy muy agradecida de haber conocido a la maestra; nos ha transmitido sus conocimientos de manera amable y generosa. Además, siempre está estudiando, incluso viajando a la India para aprender de los mejores maestros. Recomiendo el yoga para sanar dolencias físicas y espirituales, soltar penas, aliviar dolores, bajar el estrés y así, mejorar nuestra calidad de vida.'
+    testimonioCorto: 'A mis 63 años, el yoga con Krisstina no solo alivió mi lumbago, sino que transformó mi cuerpo, mente y alma. Ahora disfruto de una vitalidad que me permite cuidar a mi nieta.',
+    testimonioCompleto: 'Mi experiencia con clases de yoga. Tengo 63 años y hace 4 años comencé mis clases de yoga con la maestra Krisstina en mi comuna. Fui para mejorar mis dolencias de lumbago de ese tiempo y allí comencé mi proceso con la maestra...con ejercicios suaves aprendiendo a elongar, a conocer mi cuerpo , aprender a relajarse, liberar tensiones,despejar la mente y a conectar con mi respiración . Fui para mejorar mis dolencias físicas pero yoga ha sido mucho más ,es un cambio integral, ha mejorado mi cuerpo, mi alma y mi mente. Hoy cuido a mi nieta de un año ...voy tres veces por semana ,pensé que por el lumbago no lo podría hacer....sin embargo me siento con gran estado físico para hacerlo ,cuando termino los cuidados realizo mis ejercicios de yoga....estirar la columna, relajar el cuello, elongar piernas brazos,hombros... etc. Ya no tengo ese dolor constante de lumbago y si viene lo alivio con mis clases semanales o en casa con los ejercicios ya aprendidos. Cuando he dormido mal práctico la postura del niño por unos 10 a 15 minutos y me siento mucho mejor. Estoy muy agradecida haber conocido a la maestra ,ella nos ha transmitido sus conocimientos de una manera amable y generosa ,además siempre está estudiando ,incluso viajando a la India para aprender con los mejores maestros. Recomiendo yoga para sanar dolencias físicas y espirituales , para soltar penas y dolores ,para bajar el stress y asi mejorar nuestra cálidad de vida.'
   },
   {
     id: 'dest-3',
