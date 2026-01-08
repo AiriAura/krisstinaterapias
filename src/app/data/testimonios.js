@@ -3,20 +3,7 @@
 // Testimonios agrupados por terapia para páginas específicas
 export const TESTIMONIOS_POR_TERAPIA = {
   'flores-bach': [
-    {
-      id: 'test-bach-1',
-      nombre: 'Daniela R.',
-      edad: 28,
-      problema: 'Miedo al cambio y ansiedad',
-      resultado: 'Tomé la decisión de cambiar de carrera con confianza',
-      rating: 5,
-      sesiones: 8,
-      imagen: 'https://randomuser.me/api/portraits/women/65.jpg',
-      verificado: true,
-      fecha: '2024-10-01',
-      testimonioCorto: 'Las Flores de Bach con Cristina fueron el empujón que necesitaba. Supo identificar las esencias que mi alma pedía y me ayudaron a tomar decisiones importantes sin miedo y con confianza.',
-      testimonioCompleto: 'Las Flores de Bach con Cristina fueron el empujón que necesitaba. Ella supo identificar exactamente las esencias que mi alma pedía. Me ayudaron a tomar decisiones importantes sin miedo, dándome la confianza para cambiar de carrera, un paso que me aterraba. Su guía fue clave en mi proceso.'
-    }
+    // La entrada de Daniela R. ha sido eliminada
   ],
   'yoga': [
     {
@@ -46,6 +33,19 @@ export const TESTIMONIOS_POR_TERAPIA = {
       fecha: '2024-10-20',
       testimonioCorto: 'Las clases de yoga con Kristina son increíbles. Me ayudaron a conectar con mi cuerpo, calmar mi ansiedad y recuperar la energía. Ahora me siento más fuerte y vital. ¡La recomiendo al 100%!',
       testimonioCompleto: 'Las clases de yoga con Kristina son increíbles. Me han ayudado a conectar con mi cuerpo y a calmar mi mente, que solía estar llena de ansiedad. He recuperado la energía que había perdido y ahora me siento más fuerte, vital y flexible que nunca. ¡La recomiendo al 100%!'
+    },
+    {
+      id: 'test-yoga-3',
+      nombre: 'Sandra Solier R.',
+      problema: 'Lupus Eritematoso Sistémico',
+      resultado: 'La enfermedad ya no está activa gracias al yoga',
+      rating: 5,
+      imagen: 'https://randomuser.me/api/portraits/women/70.jpg',
+      verificado: true,
+      fecha: '2024-11-15',
+      terapias: ['yoga'],
+      testimonioCorto: 'Conocí a Kristina por intermedio de mi amiga que era su hermana, fue un angelito que llegó a mi vida. Sane con la terapia de Yoga qué Kristina me enseñó.',
+      testimonioCompleto: 'Hace aproximadamente unos 5 años conocí a Kristina por intermedio de mi amiga que era su hermana, fue un angelito que llegó a mi vida, fui diagnosticada con Lupus Eritematoso Sistemico hace 7 años,hace 2 años que ya no está activo la enfermedad crónica que padecí y si lo tuve pero ahora no,sane con la terapia de Yoga qué Kristina me enseñó, muchas gracias por todo Kristina,te debo la vida,miles de bendiciones.'
     }
   ]
 };
@@ -54,18 +54,16 @@ export const TESTIMONIOS_POR_TERAPIA = {
 export const TESTIMONIOS_DESTACADOS = [
   {
     id: 'dest-1',
-    nombre: 'Daniela R.',
-    edad: 28,
-    ocupacion: 'Estudiante',
-    problema: 'Miedo al cambio y ansiedad',
-    resultado: 'Tomé la decisión de cambiar de carrera con confianza',
+    nombre: 'Sandra Solier R.',
+    problema: 'Lupus Eritematoso Sistémico',
+    resultado: 'La enfermedad ya no está activa gracias al yoga',
     rating: 5,
-    imagen: 'https://randomuser.me/api/portraits/women/65.jpg',
+    imagen: 'https://randomuser.me/api/portraits/women/70.jpg',
     verificado: true,
-    fecha: '2024-10-01',
-    terapias: ['flores-bach'],
-    testimonioCorto: 'Las Flores de Bach con Cristina fueron el empujón que necesitaba. Supo identificar las esencias que mi alma pedía y me ayudaron a tomar decisiones importantes sin miedo y con confianza.',
-    testimonioCompleto: 'Las Flores de Bach con Cristina fueron el empujón que necesitaba. Ella supo identificar exactamente las esencias que mi alma pedía. Me ayudaron a tomar decisiones importantes sin miedo, dándome la confianza para cambiar de carrera, un paso que me aterraba. Su guía fue clave en mi proceso.'
+    fecha: '2024-11-15',
+    terapias: ['yoga'],
+    testimonioCorto: 'Conocí a Kristina por intermedio de mi amiga que era su hermana, fue un angelito que llegó a mi vida. Sane con la terapia de Yoga qué Kristina me enseñó.',
+    testimonioCompleto: 'Hace aproximadamente unos 5 años conocí a Kristina por intermedio de mi amiga que era su hermana, fue un angelito que llegó a mi vida, fui diagnosticada con Lupus Eritematoso Sistemico hace 7 años,hace 2 años que ya no está activo la enfermedad crónica que padecí y si lo tuve pero ahora no,sane con la terapia de Yoga qué Kristina me enseñó, muchas gracias por todo Kristina,te debo la vida,miles de bendiciones.'
   },
   {
     id: 'dest-2',

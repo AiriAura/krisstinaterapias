@@ -109,7 +109,7 @@ export default function TestimonioCard({ testimonio, index = 0, variant = 'defau
           </div>
         </motion.div>
       )}
-a
+
       <div className="testimonio-footer">
         <span className="testimonio-fecha">
           {new Date(testimonio.fecha).toLocaleDateString('es-CL', { 
