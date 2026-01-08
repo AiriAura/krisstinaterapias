@@ -3,7 +3,7 @@
 import { useState } from 'react';
 import { motion } from 'framer-motion';
 import Image from 'next/image';
-import { Star, CheckCircle, ChevronDown } from 'lucide-react';
+import { Star, CheckCircle } from 'lucide-react';
 
 export default function TestimonioCard({ testimonio, index = 0, variant = 'default' }) {
   const [isExpanded, setIsExpanded] = useState(false);
@@ -47,6 +47,8 @@ export default function TestimonioCard({ testimonio, index = 0, variant = 'defau
       whileInView={{ opacity: 1, y: 0 }}
       viewport={{ once: true }}
       transition={{ duration: 0.5, delay: index * 0.1 }}
+      onClick={() => setIsExpanded(!isExpanded)}
+      style={{ cursor: 'pointer' }}
     >
       <div className="testimonio-header">
         <Image 
@@ -94,22 +96,20 @@ export default function TestimonioCard({ testimonio, index = 0, variant = 'defau
         </div>
       </div>
 
-      <div className="testimonio-completo">
-          <p>"{isExpanded ? testimonio.testimonioCompleto : testimonio.testimonioCorto}"</p>
-          <button 
-            onClick={() => setIsExpanded(!isExpanded)} 
-            className="ver-mas-btn"
-          >
-            <span>{isExpanded ? 'Ver menos' : 'Ver más'}</span>
-            <motion.div
-              animate={{ rotate: isExpanded ? 180 : 0 }}
-              transition={{ duration: 0.3 }}
-            >
-              <ChevronDown size={20} />
-            </motion.div>
-          </button>
-      </div>
-
+      {testimonio.testimonioCompleto && (
+        <motion.div 
+          className="testimonio-completo"
+          initial={false}
+          animate={{ height: isExpanded ? 'auto' : 0, opacity: isExpanded ? 1 : 0 }}
+          transition={{ duration: 0.4, ease: "easeInOut" }}
+          style={{ overflow: 'hidden' }}
+        >
+          <div style={{ paddingTop: '1rem', paddingBottom: '1rem' }}>
+             <p>"{isExpanded ? testimonio.testimonioCompleto : ''}"</p>
+          </div>
+        </motion.div>
+      )}
+a
       <div className="testimonio-footer">
         <span className="testimonio-fecha">
           {new Date(testimonio.fecha).toLocaleDateString('es-CL', { 
