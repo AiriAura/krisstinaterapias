@@ -1,40 +1,32 @@
 
-import { Lavishly_Yours, Stalemate, Buda, Montserrat, Cinzel_Decorative } from "next/font/google";
+import { Montserrat, Cinzel_Decorative, Lavishly_Yours, Stalemate } from "next/font/google";
 import "./globals.css";
 
-// Importando la fuente para el cuerpo del texto
-const montserrat = Montserrat({
+// Principio de Single Source of Truth: Las fuentes se definen aquí
+// y se asignan a las variables semánticas utilizadas en globals.css.
+
+const bodyFont = Montserrat({
   subsets: ["latin"],
   weight: ["400", "600"],
-  variable: "--font-montserrat",
+  variable: "--font-family-body", // Asignado a la variable de cuerpo de texto
 });
 
-// FUENTE: Para "Conecta con tu Esencia Divina"
-const lavishly = Lavishly_Yours({
-  subsets: ["latin"],
-  weight: "400",
-  variable: "--font-lavishly",
-});
-
-// FUENTE: Para el logo "Cristina Holística"
-const stalemate = Stalemate({
-  subsets: ["latin"],
-  weight: "400",
-  variable: "--font-stalemate",
-});
-
-// FUENTE: Para títulos (actualmente en desuso)
-const buda = Buda({
-  subsets: ["latin"],
-  weight: "300",
-  variable: "--font-buda",
-});
-
-// NUEVA FUENTE: Para los títulos de sección (H2)
-const cinzel = Cinzel_Decorative({
+const headingFont = Cinzel_Decorative({
   subsets: ["latin"],
   weight: ["400"],
-  variable: "--font-cinzel",
+  variable: "--font-family-heading", // Asignado a la variable de encabezados
+});
+
+const displayFont = Lavishly_Yours({
+  subsets: ["latin"],
+  weight: "400",
+  variable: "--font-family-display", // Asignado a la variable de texto "display"
+});
+
+const logoFont = Stalemate({
+  subsets: ["latin"],
+  weight: "400",
+  variable: "--font-family-logo", // Asignado a la variable del logo
 });
 
 export const metadata = {
@@ -44,7 +36,7 @@ export const metadata = {
 
 export default function RootLayout({ children }) {
   return (
-    <html lang="es" className={`${montserrat.variable} ${lavishly.variable} ${stalemate.variable} ${buda.variable} ${cinzel.variable}`}>
+    <html lang="es" className={`${bodyFont.variable} ${headingFont.variable} ${displayFont.variable} ${logoFont.variable}`}>
       <head>
         <link rel="icon" href="/icon.ico" />
       </head>
