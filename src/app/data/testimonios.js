@@ -22,17 +22,15 @@ export const TESTIMONIOS_POR_TERAPIA = {
     },
     {
       id: 'test-yoga-2',
-      nombre: 'Laura Gómez',
-      edad: 31,
-      problema: 'Ansiedad y falta de energía',
-      resultado: 'Pude sentirme con mas vitalidad y energía',
+      nombre: 'Elizabeth Pinochet',
+      problema: 'Salir del piloto automático y molestias de espalda',
+      resultado: 'Disfrutar de las cosas simples, gratitud y alivio de espalda',
       rating: 5,
-      sesiones: 15,
-      imagen: 'https://randomuser.me/api/portraits/women/1.jpg',
+      imagen: 'https://randomuser.me/api/portraits/women/3.jpg',
       verificado: true,
-      fecha: '2024-10-20',
-      testimonioCorto: 'Las clases de yoga con Kristina son increíbles. Me ayudaron a conectar con mi cuerpo, calmar mi ansiedad y recuperar la energía. Ahora me siento más fuerte y vital. ¡La recomiendo al 100%!',
-      testimonioCompleto: 'Las clases de yoga con Kristina son increíbles. Me han ayudado a conectar con mi cuerpo y a calmar mi mente, que solía estar llena de ansiedad. He recuperado la energía que había perdido y ahora me siento más fuerte, vital y flexible que nunca. ¡La recomiendo al 100%!'
+      fecha: '2026-01-08',
+      testimonioCorto: 'El yoga me ayudó a salir del piloto automático y a disfrutar de las cosas simples. Un espacio que nutre el cuerpo y el alma.',
+      testimonioCompleto: 'Siento que hay un antes y un después desde que comencé a practicar yoga. Me ayudó a salir del piloto automático, a disfrutar de las cosas simples y a comenzar cada día con gratitud. Además, para mi molestia de espalda ha sido profundamente enriquecedor. Espero con ansias cada martes y jueves para disfrutar las clases con Kristy, por su cordialidad, su conocimiento y la ternura que pone en cada práctica. Sin duda, un espacio que nutre el cuerpo y el alma.'
     },
     {
       id: 'test-yoga-3',
@@ -82,18 +80,17 @@ export const TESTIMONIOS_DESTACADOS = [
   },
   {
     id: 'dest-3',
-    nombre: 'Laura Gómez',
-    edad: 31,
-    ocupacion: 'Diseñadora',
-    problema: 'Ansiedad y falta de energía',
-    resultado: 'Pude sentirme con mas vitalidad y energía',
+    nombre: 'Elizabeth Pinochet',
+    ocupacion: 'Alumna de Yoga',
+    problema: 'Salir del piloto automático y molestias de espalda',
+    resultado: 'Disfrutar de las cosas simples, gratitud y alivio de espalda',
     rating: 5,
-    imagen: 'https://randomuser.me/api/portraits/women/1.jpg',
+    imagen: 'https://randomuser.me/api/portraits/women/3.jpg',
     verificado: true,
-    fecha: '2024-10-20',
+    fecha: '2026-01-08',
     terapias: ['yoga'],
-    testimonioCorto: 'Las clases de yoga con Kristina son increíbles. Me ayudaron a conectar con mi cuerpo, calmar mi ansiedad y recuperar la energía. Ahora me siento más fuerte y vital. ¡La recomiendo al 100%!',
-    testimonioCompleto: 'Las clases de yoga con Kristina son increíbles. Me han ayudado a conectar con mi cuerpo y a calmar mi mente, que solía estar llena de ansiedad. He recuperado la energía que había perdido y ahora me siento más fuerte, vital y flexible que nunca. ¡La recomiendo al 100%!'
+    testimonioCorto: 'El yoga me ayudó a salir del piloto automático y a disfrutar de las cosas simples. Un espacio que nutre el cuerpo y el alma.',
+    testimonioCompleto: 'Siento que hay un antes y un después desde que comencé a practicar yoga. Me ayudó a salir del piloto automático, a disfrutar de las cosas simples y a comenzar cada día con gratitud. Además, para mi molestia de espalda ha sido profundamente enriquecedor. Espero con ansias cada martes y jueves para disfrutar las clases con Kristy, por su cordialidad, su conocimiento y la ternura que pone en cada práctica. Sin duda, un espacio que nutre el cuerpo y el alma.'
   }
 ];
 
