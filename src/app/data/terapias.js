@@ -10,7 +10,7 @@ export const TERAPIAS_DATA = [
     duracion: '60 min',
     precio: 'Desde $25.000',
     precioNumerico: 25000,
-    imagen: '/reiki.jpg',
+    imagen: '/reiki.webp',
     alt: 'Manos aplicando terapia Reiki, simbolizando sanación energética.',
     popular: true,
     testimonios: 47,
